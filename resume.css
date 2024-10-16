@@ -460,7 +460,7 @@ body {
 
 @media (max-width: 48em) {
   html {
-    font-size: 43.75%;
+    font-size: 50%;
   }
   .home {
     grid-template-columns: 1fr;
@@ -471,9 +471,9 @@ body {
 }
 
 @media (max-width: 31.5em) {
-  html {
+  /* html {
     font-size: 43.75%;
-  }
+  } */
   .home {
     display: grid;
     max-width: 90%;
@@ -523,16 +523,29 @@ body {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+  .about_lists {
+    grid-template-columns: 1fr;
+  }
+  .projects_lists {
+    grid-template-columns: 1fr;
+    row-gap: 2rem;
+  }
+  .skills-container {
+    grid-template-columns: 1fr;
+  }
+  .education-lists {
+    grid-template-columns: 1fr;
+  }
 }
 
-@media (max-width: 23.43em) {
+@media (max-width: 24em) {
   .home {
     display: grid;
-    max-width: 90%;
-    margin: 1rem;
+    max-width: 95%;
+    margin: 1rem auto;
   }
   .project_list img {
-    max-width: 25rem;
+    max-width: 100%;
     border-radius: 1rem;
   }
   .contact-info {

@@ -12,10 +12,20 @@
     <title>Avinash portfolio</title>
     <link rel="stylesheet" href="resume.css" />
   </head>
-  <body>
+  <body class="dark">
+ <div class="cursor"></div>
     <header>
       <nav class="navbar">
-        <h3>Avinash's <span class="portfolio">Portfolio</span></h3>
+        <div>
+          <h3 class="name">Avinash's <span class="portfolio">Portfolio</span></h3>
+        </div>
+        <div class="toggler">
+          <label for="switch" class="switch">
+            <input id="switch" type="checkbox" />
+            <span class="slider"></span>
+            <span class="decoration"></span>
+          </label>
+        </div>
       </nav>
     </header>
     <section class="home">
@@ -252,8 +262,12 @@
             </div>
           </div>
           <div class="main--projects main-tab" data-tab="projects">
-            <h2 class="main-title">PROJECTS</h2>
-            <ul class="projects_lists">
+            <h2 class="main-title">WORK</h2>
+            <ul class="work_tabs">
+              <li class="work_tab active" data-work="projects_lists">Projects</li>
+              <li class="work_tab" data-work="blogs_lists">Blogs</li>
+            </ul>
+            <ul class="work projects_lists active">
               <li class="project_list">
                 <a href="https://notes-3-n7zi.onrender.com/">
                   <img src="./assets/images/notes.png" alt="" />
@@ -291,7 +305,24 @@
                   <img src="./assets/images/pukse.png" alt="" />
                 </a>
                 <p>Web Development</p>
-                <h3>Fest Website</h3>
+                <h3>College Fest Website</h3>
+              </li>
+            </ul>
+            <ul class="work blogs_lists">
+             <li class="project_list">
+                <a href="https://medium.com/@avinashabhi870/singlylinkedlist-a8e00dac9e58">
+                  <img src="./assets/images/java-linkedlist.jpg" alt="" />
+                </a>
+                <p>Blog</p>
+                <h3>Singly Linkedlist </h3>
+              </li>
+
+               <li class="project_list">
+                <a href="https://medium.com/@avinashabhi870/redis-a50cb94d2e51">
+                  <img src="./assets/images/redis.png" alt="" />
+                </a>
+                <p>Blog</p>
+                <h3>Redis </h3>
               </li>
             </ul>
           </div>
@@ -378,7 +409,15 @@
     <script>
       const tab = document.querySelector('.tab-container');
       const tabs = document.querySelectorAll('.tab-btn');
+      const workTabs = document.querySelectorAll(".work_tab")
+      const work_tab = document.querySelector(".work_tabs");
+      const works = document.querySelectorAll(".work")
       const tabContent = document.querySelectorAll('.main-tab');
+      const cursor = document.querySelector(".cursor")
+      const toggler = document.querySelector(".toggler")
+      const body = document.querySelector("body")
+      const name = document.querySelector(".name")
+      const mainTitleElements = document.querySelectorAll('.main-title');
       tab.addEventListener('click', e => {
         const clicked = e.target.closest('.tab-btn');
         if (!clicked) return;
@@ -390,6 +429,49 @@
           .classList.add('main-tab--active');
         console.log();
       });
+      work_tab.addEventListener("click",(e)=>{
+        const clicked = e.target.closest(".work_tab");
+        console.log(clicked);
+        if(!clicked) return;
+        workTabs.forEach(tab => tab.classList.remove("active"))
+        works.forEach(work => work.classList.remove("active"))
+        clicked.classList.add("active")
+        console.log();
+        document.querySelector(`.${clicked.dataset.work}`).classList.add("active")
+      })
+
+      window.addEventListener("mousemove",(e)=>{
+        console.log(e);
+        cursor.style.top = `${e.pageY}px`;
+        cursor.style.left = `${e.pageX}px`
+      })
+      let isClicking = false;
+
+    toggler.addEventListener("click", (e) => {
+        if (isClicking) return;  
+        isClicking = true;
+
+        setTimeout(() => {
+            isClicking = false;  
+        }, 300);  
+
+        body.classList.toggle("dark");
+    });
+    function addHoverEffect(element) {
+    element.addEventListener("mouseenter", () => {
+      cursor.style.transform = 'scale(10)';
+      cursor.style.mixBlendMode = 'difference';
+    });
+
+    element.addEventListener("mouseleave", () => {
+      cursor.style.transform = 'scale(1)';
+      cursor.style.mixBlendMode = 'initial';
+    });
+  }
+
+  addHoverEffect(name);
+mainTitleElements.forEach(mainTitle => addHoverEffect(mainTitle));
+
     </script>
   </body>
 </html>
